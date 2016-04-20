@@ -4,18 +4,13 @@ from mpl_toolkits.basemap import Basemap
 import unicodedata
 from googlemaps import Client
 
-def createMap():
+chronicUSDiseases = pd.read_csv("U.S._Chronic_Disease_Indicators__CDI_.csv", sep=',',encoding='utf8', low_memory=False, dtype='str')
+
+def createMap(lat, lon):
 	gmaps = Client(key="AIzaSyCRH0Z8gMlRa2XXPA_TXhoQws9BANn6jmU")
 
-def storeLatLong()
+def storeLatLon(lat, lon):
 
-def main():
-	#CSV is parsed and read into variable
-	chronicUSDiseases = pd.read_csv("U.S._Chronic_Disease_Indicators__CDI_.csv", sep=',',encoding='utf8', low_memory=False, dtype='str')
-	blankMap = createMap()
-	
-	lon = []
-	lat = []
 	index = 0
 	for row in chronicUSDiseases["GeoLocation"]:
 		commaLocation = 0
@@ -40,9 +35,13 @@ def main():
 		lat[index] = float(lat[index])
 		index += 1
 
-	#x, y = blankMap(lat, lon)
-	#blankMap.scatter(x,y,1,marker='o',color='red')
-	#plt.show()
+def main():
+	#CSV is parsed and read into variable
+	
+	longitude = []
+	latitude = []
+
+	storeLatLon(latitude, longitude)
 
 if __name__ == "__main__":
     main()
