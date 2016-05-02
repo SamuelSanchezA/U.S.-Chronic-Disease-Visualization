@@ -4,7 +4,7 @@ import os
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 import random
-from PIL import Image
+from PIL import Image, ImageFont, ImageDraw
 
 
 #sorts, adds, and creates dict of catagories without duplicates
@@ -106,17 +106,59 @@ def colorize(domain, catagories):
         local[i] = int(convert(oldMin, oldMax, local[i]))
 
     print (local)
-"""
+
+    resBase = len(local)
+    print("Local length")
+    print(resBase)
+
+    length = 0
+    if resBase % 4 == 0:
+        length = resBase / 4
+        length *= 200
+    elif resBase % 4 != 0:
+        length = int(resBase / 4)
+        length += 1
+        length *= 200
+
+    height = int(length)
+
     rgb = (255,255,255)
-    res = (800,300)
+    res = (1000,height)
     newimage = Image.new("RGB",res,rgb)
     newImageData = newimage.load()
 
-    for x in range(pixstart,pixend):
-        for y in range(0,300):
-            newImageData[x,y] = (255, int(num),int(num))
+    for x in range(0, 1000):
+        for y in range(0, height):
+            newImageData[x,y] = (0, 0, 0)
+
+    piCount = 1
+    buffery = 0
+    textHeight = 0
+    for i in local:
+        bufferx = piCount * 200
+        for x in range(bufferx,bufferx + 200):
+            for y in range(buffery, buffery + 200):
+                newImageData[x,y] = (local[i], 0, int(local[i]/2))
+
+        draw = ImageDraw.Draw(newimage)
+        # font = ImageFont.truetype(<font-file>, <font-size>)
+        # font = ImageFont.truetype("sans-serif.ttf", 16)
+        # draw.text((x, y),"Sample Text",(r,g,b))
+        font = ImageFont.truetype("HelvLight Regular.ttf", 16)
+        draw.text((0, textHeight),i,(255,255,255), font)
+
+        if piCount < 4:
+            piCount += 1
+            textHeight += 30
+        elif piCount == 4:
+            buffery += 200
+            piCount = 1
+            textHeight += 110
+
+
+
     newimage.save("colortest.png")
-"""
+
 
 def printDict(Dict):
     print("")
