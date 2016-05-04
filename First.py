@@ -28,7 +28,7 @@ def main():
 
 
     dfi.wordcloud(catagory)
-    dfi.colorize("ca", catagory)
+    dfi.colorize("al", catagory)
 
     #opens html file
     webbrowser.open("htmlthing.html")

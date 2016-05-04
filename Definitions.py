@@ -2,7 +2,6 @@ import csv
 import os
 #from scipy.misc import imread
 from wordcloud import WordCloud, STOPWORDS
-import matplotlib.pyplot as plt
 import random
 from PIL import Image, ImageFont, ImageDraw
 
@@ -55,7 +54,6 @@ def wordcloud(wordSource):
     wordcloud.to_file("wordcloud.png")
 
     #cloud1_coloring = imread(os.path.join(d, "CloudColor.png")).read()
-
 
 #converts numbers to range of 0-255 for rgb
 def convert(oldMin, oldMax, oldValue):
@@ -138,7 +136,7 @@ def colorize(domain, catagories):
         bufferx = piCount * 200
         for x in range(bufferx,bufferx + 200):
             for y in range(buffery, buffery + 200):
-                newImageData[x,y] = (local[i], 0, int(local[i]/2))
+                newImageData[x,y] = (0, int(local[i]), int(local[i]/2))
 
         draw = ImageDraw.Draw(newimage)
         # font = ImageFont.truetype(<font-file>, <font-size>)
@@ -154,10 +152,7 @@ def colorize(domain, catagories):
             buffery += 200
             piCount = 1
             textHeight += 110
-
-
-
-    newimage.save("colortest.png")
+    newimage.save("colorplot.png")
 
 
 def printDict(Dict):
