@@ -78,15 +78,15 @@ bubbleSort(diseaseCounter, singleDiseaseList)
 count = 0
 
 data = {
-    'disease' : singleDiseaseList,
-    'numberOfOccurances' : diseaseCounter
+    'Disease Name' : singleDiseaseList,
+    '# of Occurances' : diseaseCounter
 }
 
 for index in singleDiseaseList:
     print "Disease : " + singleDiseaseList[count] + ". Counter : " + str(diseaseCounter[count])
     count+=1
     
-p = Bar(data, values= 'numberOfOccurances',label=CatAttr(columns=['disease'], sort=False), title='List of Diseases', color = 'blue')
+p = Bar(data, values= '# of Occurances',label=CatAttr(columns=['Disease Name'], sort=False), title='U.S. Chronic Diseases (2007-2013)', color = 'blue')
 #make a list for 5 top diseases and 5 least likely diseases
 
 output_file("bar.html")
