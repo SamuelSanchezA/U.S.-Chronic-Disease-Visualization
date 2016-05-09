@@ -25,7 +25,7 @@ def count(listi, dicti):
 
 #creates color pallette of wordcloud
 def grey_color_func(word, font_size, position, orientation, random_state=None, **kwargs):
-    return "hsl(0, 0%%, %d%%)" % random.randint(60, 100)
+    return "hsl(0, 0%%, %d%%)" % random.randint(60, 70)
 
 
 #craetes wordcloud and saves it to an image
@@ -45,7 +45,7 @@ def wordcloud(wordSource):
 
     # generate word cloud
     wordcloud = WordCloud(stopwords=STOPWORDS,
-        background_color="black",
+        background_color="white",
         width = 650,
         height = 250).generate_from_text(thefile)
 
@@ -64,13 +64,15 @@ def convert(oldMin, oldMax, oldValue):
 
 #uses values from convert() to generate the hue of a specified colorize
 #saves to image
-def colorize(domain, catagories):
+def colorize(catagories):
+    statestr = input("Enter state abbrevieation: ")
+    statestr = statestr.lower()
     local = {}
     newCats = []
     with open('U.S._Chronic_Disease_Indicators__CDI_.csv', newline='') as f:
         reader = csv.reader(f)
         for row in reader:
-            if (row[1].lower() == str(domain)):
+            if (row[1].lower() == statestr):
                 newCats.append(row[3].lower())
     classify(newCats, local)
     count(newCats, local)
@@ -127,7 +129,7 @@ def colorize(domain, catagories):
 
     for x in range(0, 1000):
         for y in range(0, height):
-            newImageData[x,y] = (0, 0, 0)
+            newImageData[x,y] = (255, 255, 255)
 
     piCount = 1
     buffery = 0
@@ -136,14 +138,14 @@ def colorize(domain, catagories):
         bufferx = piCount * 200
         for x in range(bufferx,bufferx + 200):
             for y in range(buffery, buffery + 200):
-                newImageData[x,y] = (0, int(local[i]), int(local[i]/2))
+                newImageData[x,y] = (int(local[i]), int(local[i]), 255)
 
         draw = ImageDraw.Draw(newimage)
         # font = ImageFont.truetype(<font-file>, <font-size>)
         # font = ImageFont.truetype("sans-serif.ttf", 16)
         # draw.text((x, y),"Sample Text",(r,g,b))
-        font = ImageFont.truetype("HelvLight Regular.ttf", 16)
-        draw.text((0, textHeight),i,(255,255,255), font)
+        font = ImageFont.truetype("HelvLight Regular.ttf", 18)
+        draw.text((0, textHeight),i,(0,0,0), font)
 
         if piCount < 4:
             piCount += 1
