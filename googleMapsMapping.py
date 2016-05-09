@@ -5,7 +5,7 @@ year: US chronic diseases reported by the CDC between 2007-2013
 			 are mapped onto a map of the United States (continental and offshore)
 """
 from bokeh.io import output_file, show
-from bokeh.models import GMapPlot, GMapOptions, ColumnDataSource, Circle, DataRange1d, PanTool, WheelZoomTool, BoxSelectTool, HoverTool
+from bokeh.models import GMapPlot, GMapOptions, ColumnDataSource, DataRange1d, PanTool, WheelZoomTool, BoxSelectTool, HoverTool, Diamond
 import csv
 
 def extractData(filePath, geoData, cat, year):
@@ -23,7 +23,6 @@ def extractData(filePath, geoData, cat, year):
 			cat.append(row[3])
 			year.append(row[0])
 			del modifiedRow
-	#print geoLocations[:10]
 
 def plotPoints(latLonData, category, year):
 	latitude = []
@@ -45,17 +44,18 @@ def plotPoints(latLonData, category, year):
 
 	dataSource = ColumnDataSource(
 		data=dict(
-			lat = latitude,
-			lon = longitude,
-			cat = category,
-			year = year
+			lat = latitude[:5000],
+			lon = longitude[:5000],
+			cat = category[:5000],
+			year = year[:5000]
 		)
 	)
 
 	hover = HoverTool(
         tooltips=[
-            ("Category: ", "@cat"),
-            ("Year: ", "@year"),
+        	("Case#", "$index"),
+            ("Category", "@cat"),
+            ("Year", "@year"),
         ]
     )
 	
@@ -64,17 +64,17 @@ def plotPoints(latLonData, category, year):
 	plot = GMapPlot(x_range=DataRange1d(), y_range=DataRange1d(), 
 					map_options=map_options, title="U.S. Chronic Disease Locations (2008-2013)")
 
-	circle = Circle(x="lon", y="lat", size=5, fill_color="red", fill_alpha=0.8, line_color=None)
-	plot.add_glyph(dataSource, circle)
+	diamond = Diamond(x="lon", y="lat", size=10, fill_color="red", fill_alpha=0.2, line_color='white')
+	plot.add_glyph(dataSource, diamond)
 
 	plot.add_tools(PanTool(), WheelZoomTool(), BoxSelectTool(), hover)
-	output_file("disease.html")
+	output_file("disease.html", title="Diseases")
+	
 	show(plot)
 	
 def fillLatAndLon(latitude, longitude, geoData):
 	
 	index = 0
-
 	for row in geoData:
 		if len(row) != 0:
 			commaLocation = row.find(',')
