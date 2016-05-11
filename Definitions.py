@@ -97,8 +97,8 @@ def colorize(catagories, states2):
     #smiply checking
     #comment this out if you dont want anything
     #to print to terminal
-    for i in local:
-        print (i + ": " + str(local[i]))
+    #for i in local:
+    #    print (i + ": " + str(local[i]))
 
     #new list is to contain the key values of local
     newList = [0]
@@ -122,8 +122,8 @@ def colorize(catagories, states2):
         local[i] = int(convert(oldMax, oldMin, local[i]))
 
     #new local dict adjusted for RGB value scale
-    print("Adjusted for RGB")
-    print (local)
+    #print("Adjusted for RGB")
+    #print (local)
 
     #dynamically generate height of image using amount of stat in the string
     resBase = len(local)
@@ -184,9 +184,3 @@ def colorize(catagories, states2):
             textHeight += 110
     #save image
     newimage.save("colorplot.png")
-
-
-def printDict(Dict):
-    print("")
-    for i in Dict:
-        print (i + ": " + str(Dict[i]))
