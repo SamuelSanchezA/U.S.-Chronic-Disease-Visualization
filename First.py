@@ -1,34 +1,33 @@
 import os
 import webbrowser
 import csv
-
 import Definitions as dfi
 
 def main():
-    dates=[]
-    datesDict={}
+    #lists and dictionaries used for this instance
     states=[]
-    statesDict={}
+    states2 = {}
     catagory=[]
     catagoryDict={}
 
+    #imports the csv file and appends the data to corrisponding lists
     with open('U.S._Chronic_Disease_Indicators__CDI_.csv', newline='') as f:
         reader = csv.reader(f)
         for row in reader:
-            dates.append(row[0])
             states.append(row[1])
             catagory.append(row[3])
 
+    #sorts lists into dictionaries without duplicates
     dfi.classify(catagory, catagoryDict)
-    dfi.classify(dates, datesDict)
-    dfi.classify(states, statesDict)
+    dfi.classify(states, states2)
+
+    #counts frequency of diseases and adds to corrisponding key in dictionary
     dfi.count(catagory, catagoryDict)
-    dfi.count(dates, datesDict)
-    dfi.count(states, statesDict)
 
-
+    #generates wordcloud using list of diseases
     dfi.wordcloud(catagory)
-    dfi.colorize(catagory)
+    #generates color plot using list of deiseases and dictionary of states
+    dfi.colorize(catagory, states2)
 
     #opens html file
     webbrowser.open("htmlthing.html")
