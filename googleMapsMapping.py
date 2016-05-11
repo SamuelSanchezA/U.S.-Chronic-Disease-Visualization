@@ -42,12 +42,30 @@ def plotPoints(latLonData, category, year):
 	category = [x for x in category if len(x) != 0]
 	year = [x for x in year if len(x) != 0]
 
+	moddedLat = []
+	moddedLon = []
+	moddedCat = []
+	moddedYear = []
+
+	
+	for x in range(0, len(latitude), 20):
+		moddedLat.append(latitude[x])
+		moddedLon.append(longitude[x])
+		moddedCat.append(category[x])
+		moddedYear.append(year[x])
+
+	latitude = moddedLat
+	longitude = moddedLon
+	category = moddedCat
+	year = moddedYear
+	
+
 	dataSource = ColumnDataSource(
 		data=dict(
-			lat = latitude[:5000],
-			lon = longitude[:5000],
-			cat = category[:5000],
-			year = year[:5000]
+			lat = latitude,
+			lon = longitude,
+			cat = category,
+			year = year
 		)
 	)
 

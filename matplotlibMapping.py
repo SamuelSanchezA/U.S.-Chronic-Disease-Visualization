@@ -5,6 +5,7 @@ Created: 18 April 2016
 """
 import matplotlib.pyplot as plt
 import pandas as pd
+from bokeh.sampledata.us_states import data as states
 from mpl_toolkits.basemap import Basemap
 import unicodedata
 import numpy as np
@@ -52,6 +53,11 @@ def getLatLon():
 		lon = float(''.join(modifiedLatLon[commaLocation + 1 : len(modifiedLatLon)]))
 
 		if(lat != 0 and lon != 0):
+			plotPoint(lon,lat,usMap)
+			print time.clock()
+
+	for x in range(0, len(lon), 20):
+		if(lat[x] != 0 and lon[x] != 0):
 			plotPoint(lon,lat,usMap)
 			print time.clock()
 
