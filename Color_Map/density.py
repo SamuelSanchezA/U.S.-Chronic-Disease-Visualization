@@ -1,12 +1,12 @@
 """
   Name: Samuel Sanchez
   Date: 13 May 2016
+  Python 2.7
 """
 from bokeh.plotting import figure, show, output_file, hplot
 from bokeh.sampledata.us_states import data as states
 import pandas as pd
 import unicodedata
-import Tkinter as tk
 
 def categorize(parsedObject):
   categories = sorted(set(parsedObject['Category'])) # Placing states and disease categories into sorted sets
