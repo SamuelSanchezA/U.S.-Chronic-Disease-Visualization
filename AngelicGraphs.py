@@ -86,7 +86,7 @@ userFlag = 't'
 userColor = "blue"
 
 
-dataOptions = 1# 1 alphabetical list, 2 ascending list, 3 descending list
+dataOptions = 2# 1 alphabetical list, 2 ascending list, 3 descending list
 
 
 while (userFlag != 'q' and userFlag != 'Q'):

@@ -118,9 +118,9 @@ while (userFlag != 'q' and userFlag != 'Q'):
             '# of Occurances' : diseaseCounter
             }
         sorted(alphabeticalData)
-        print "***************************"
-        print "Disease Names and Occurance" 
-        print "***************************"
+        print "*******************************"
+        print "**Disease Names and Occurance**" 
+        print "*******************************"
         for index in singleDiseaseList:
             print singleDiseaseList[count] + " : " + str(diseaseCounter[count])
             count+=1
