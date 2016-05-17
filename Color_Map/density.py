@@ -1,12 +1,12 @@
 """
   Name: Samuel Sanchez
   Date: 13 May 2016
+  Python 2.7
 """
 from bokeh.plotting import figure, show, output_file, hplot
 from bokeh.sampledata.us_states import data as states
 import pandas as pd
 import unicodedata
-import Tkinter as tk
 
 def categorize(parsedObject):
   categories = sorted(set(parsedObject['Category'])) # Placing states and disease categories into sorted sets
@@ -178,7 +178,7 @@ def fillCategories(category, state, csvFile):
   excluded = ('GU', 'PR', 'VI', 'US') # Excluding data with locations as United States or territories
 
   #Colors used to fill states
-  colors = ["#DFAAAA", "#DD6666", "#954544", "#944444", "#870000", "#490000"]
+  colors = ["#DFAAAA", "#DD6666", "#B84544", "#944444", "#870000", "#490000"]
   #****************************************************************************
   # Will plot Alaska and Hawaii seperately for formatting purposes
   alaska = states['AK']
@@ -194,6 +194,7 @@ def fillCategories(category, state, csvFile):
   alaska_cases = chosenCategory['AK']
   hawaii_cases = chosenCategory['HI']
 
+  # Alaska Cases
   if(alaska_cases < 20):
     alaska_color = colors[0]
   elif(alaska_cases < 40):
@@ -204,11 +205,12 @@ def fillCategories(category, state, csvFile):
     alaska_color = colors[3]
   elif(alaska_cases < 100):
     alaska_color = colors[4]
-  elif(cases >= 100):
+  elif(alaska_cases >= 100):
     alaska_color = colors[5]
   else:
     alaska_color = "black"
 
+  #Hawaii Cases
   if(hawaii_cases < 20):
     hawaii_color = colors[0]
   elif(hawaii_cases < 40):
@@ -254,7 +256,7 @@ def fillCategories(category, state, csvFile):
           elif(cases >= 100):
             state_colors.append(colors[5])
       except KeyError:
-          state_colors.append("black")
+          state_colors.append("white")
 
 
 
@@ -263,13 +265,13 @@ def fillCategories(category, state, csvFile):
   continental_US = figure(title="US Chronic Diseases 2007-2013", toolbar_location="left",
              plot_width=1200, plot_height=700)
 
-  continental_US.circle(legend="0-20 Cases", color="#DFAAAA")
-  continental_US.circle(legend="21-40 Cases", color="#DD6666")
-  continental_US.circle(legend="41-60 Cases", color="#954544")
-  continental_US.circle(legend="61-80 Cases", color="#934444")
-  continental_US.circle(legend="81-100 Cases", color="#870000")
-  continental_US.circle(legend="100 or Greater Cases", color="#490000")
-  continental_US.circle(legend="No data recorded", color="black")
+  continental_US.circle(legend="0-20 Cases", color=colors[0])
+  continental_US.circle(legend="21-40 Cases", color=colors[1])
+  continental_US.circle(legend="41-60 Cases", color=colors[2])
+  continental_US.circle(legend="61-80 Cases", color=colors[3])
+  continental_US.circle(legend="81-100 Cases", color=colors[4])
+  continental_US.circle(legend="100 or Greater Cases", color=colors[5])
+  continental_US.circle(legend="No data recorded", color="white")
 
   continental_US.patches(continental_state_xs, continental_state_ys , fill_color=state_colors, fill_alpha=100.0,
             line_color="#884444", line_width=2.5, line_alpha=5.0)
@@ -278,13 +280,13 @@ def fillCategories(category, state, csvFile):
   alaska_figure = figure(title="Alaska", toolbar_location="left",
               plot_width=5000, plot_height=800)
 
-  alaska_figure.circle(legend="0-20 Cases", color="#DFAAAA")
-  alaska_figure.circle(legend="21-40 Cases", color="#DD6666")
-  alaska_figure.circle(legend="41-60 Cases", color="#954544")
-  alaska_figure.circle(legend="61-80 Cases", color="#934444")
-  alaska_figure.circle(legend="81-100 Cases", color="#870000")
-  alaska_figure.circle(legend="100 or Greater Cases", color="#490000")
-  alaska_figure.circle(legend="No data recorded", color="black")
+  alaska_figure.circle(legend="0-20 Cases", color=colors[0])
+  alaska_figure.circle(legend="21-40 Cases", color=colors[1])
+  alaska_figure.circle(legend="41-60 Cases", color=colors[2])
+  alaska_figure.circle(legend="61-80 Cases", color=colors[3])
+  alaska_figure.circle(legend="81-100 Cases", color=colors[4])
+  alaska_figure.circle(legend="100 or Greater Cases", color=colors[5])
+  alaska_figure.circle(legend="No data recorded", color="white")
 
   alaska_figure.patches(alaska_state_x, alaska_state_y, fill_color=alaska_color, fill_alpha=100.0,
               line_color="#884444", line_width=2.5, line_alpha=5.0)
@@ -293,13 +295,13 @@ def fillCategories(category, state, csvFile):
   hawaii_figure = figure(title="Hawaii", toolbar_location="left",
               plot_width=900, plot_height=1000)
 
-  hawaii_figure.circle(legend="0-20 Cases", color="#DFAAAA")
-  hawaii_figure.circle(legend="21-40 Cases", color="#DD6666")
-  hawaii_figure.circle(legend="41-60 Cases", color="#954544")
-  hawaii_figure.circle(legend="61-80 Cases", color="#934444")
-  hawaii_figure.circle(legend="81-100 Cases", color="#870000")
-  hawaii_figure.circle(legend="100 or Greater Cases", color="#490000")
-  hawaii_figure.circle(legend="No data recorded", color="black")
+  hawaii_figure.circle(legend="0-20 Cases", color=colors[0])
+  hawaii_figure.circle(legend="21-40 Cases", color=colors[1])
+  hawaii_figure.circle(legend="41-60 Cases", color=colors[2])
+  hawaii_figure.circle(legend="61-80 Cases", color=colors[3])
+  hawaii_figure.circle(legend="81-100 Cases", color=colors[4])
+  hawaii_figure.circle(legend="100 or Greater Cases", color=colors[5])
+  hawaii_figure.circle(legend="No data recorded", color="white")
 
   hawaii_figure.patches(hawaii_state_x, hawaii_state_y, fill_color=hawaii_color, fill_alpha=100.0,
               line_color="#884444", line_width=2.5, line_alpha=5.0)
