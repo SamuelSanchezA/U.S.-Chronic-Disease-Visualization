@@ -194,6 +194,7 @@ def fillCategories(category, state, csvFile):
   alaska_cases = chosenCategory['AK']
   hawaii_cases = chosenCategory['HI']
 
+  # Alaska Cases
   if(alaska_cases < 20):
     alaska_color = colors[0]
   elif(alaska_cases < 40):
@@ -209,6 +210,7 @@ def fillCategories(category, state, csvFile):
   else:
     alaska_color = "black"
 
+  #Hawaii Cases
   if(hawaii_cases < 20):
     hawaii_color = colors[0]
   elif(hawaii_cases < 40):
