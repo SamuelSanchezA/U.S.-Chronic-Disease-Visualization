@@ -204,7 +204,7 @@ def fillCategories(category, state, csvFile):
     alaska_color = colors[3]
   elif(alaska_cases < 100):
     alaska_color = colors[4]
-  elif(cases >= 100):
+  elif(alaska_cases >= 100):
     alaska_color = colors[5]
   else:
     alaska_color = "black"
